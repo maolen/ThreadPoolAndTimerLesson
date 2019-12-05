@@ -7,25 +7,22 @@ namespace ThreadPoolLesson
     {
         static void Main(string[] args)
         {
-            ThreadPool.GetAvailableThreads(out int threads, out int ports);
-            Console.WriteLine(threads);
-            for(var i = 0; i < 20; i++)
-            {
-                ThreadPool.QueueUserWorkItem(ProcessNumbers);
-            }
+            var timer = new Timer(ProcessNumbers, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
             Console.ReadLine();
-            //Thread.CurrentThread.Join();
         }
 
         static void ProcessNumbers(object state)
         {
-            var currentThread = Thread.CurrentThread;
+            Console.Clear();
+            Console.WriteLine(DateTime.Now.ToLongTimeString()); 
+            //var currentThread = Thread.CurrentThread;
 
-            for (var i = 0; i <= 10; i++)
-            {
-                Console.WriteLine($"[{currentThread.ManagedThreadId}] - {i}");
-                Thread.Sleep(500);
-            }
+            //for (var i = 0; i <= 10; i++)
+            //{
+            //    Console.WriteLine($"[{currentThread.ManagedThreadId}] - {i}");
+            //    Thread.Sleep(200);
+            //}
+            //Console.WriteLine($"[{currentThread.ManagedThreadId}] закончил считать");
         }
     }
 }
