@@ -9,8 +9,12 @@ namespace ThreadPoolLesson
         {
             ThreadPool.GetAvailableThreads(out int threads, out int ports);
             Console.WriteLine(threads);
-            ThreadPool.QueueUserWorkItem(ProcessNumbers);
-            Thread.CurrentThread.Join();
+            for(var i = 0; i < 20; i++)
+            {
+                ThreadPool.QueueUserWorkItem(ProcessNumbers);
+            }
+            Console.ReadLine();
+            //Thread.CurrentThread.Join();
         }
 
         static void ProcessNumbers(object state)
@@ -20,7 +24,7 @@ namespace ThreadPoolLesson
             for (var i = 0; i <= 10; i++)
             {
                 Console.WriteLine($"[{currentThread.ManagedThreadId}] - {i}");
-                Thread.Sleep(100);
+                Thread.Sleep(500);
             }
         }
     }
